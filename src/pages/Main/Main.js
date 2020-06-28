@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from "react";
-import api from "../../services/api";
+import React from "react";
 
-// import { Container } from './styles';
+import Card from "../../components/Card";
+
+import logo from "../../assets/logo_400x400.jpg";
+import * as style from "./Main.styles";
 
 export function Main() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function getData() {
-      setLoading(true);
-      const response = await api.get(`/alesp`);
-      setLoading(false);
-      console.log("aaa", response);
-      setData(response.data);
-    }
-
-    getData();
-  }, []);
-
-  console.log("aaa", data);
-
-  return <p>hello m0na</p>;
+  return (
+    <div style={style.main_content}>
+      <img style={style.m0na_logo} src={logo} alt="m0na-bot logo" />
+      <Card entity="alesp" title="SÃO PAULO" />
+    </div>
+  );
 }
