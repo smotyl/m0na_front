@@ -27,6 +27,7 @@ import * as style from "./Card.styles";
 export function Card({ title, entity }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -48,20 +49,21 @@ export function Card({ title, entity }) {
 
   return (
     <ul id="document_list" style={style.document_list}>
-      <div id="card" style={style.card}>
+      <div id="card" style={style.card} onClick={() => setShow(!show)}>
         <p>
           {title} ({data?.length})
         </p>
       </div>
-      {data.map((document) => (
-        <li id="document_item" style={style.document_item}>
-          <div id="card" style={style.card}>
-            <a style={style.document_link} href={`${document.link}`}>
-              {document.description}
-            </a>
-          </div>
-        </li>
-      ))}
+      {show &&
+        data.map((document) => (
+          <li id="document_item" style={style.document_item}>
+            <div id="card" style={style.card}>
+              <a style={style.document_link} href={`${document.link}`}>
+                {document.description}
+              </a>
+            </div>
+          </li>
+        ))}
     </ul>
   );
 }
