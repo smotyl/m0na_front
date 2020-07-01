@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
-import * as style from "./Card.styles";
+// import * as style from "./Card.styles";
+import "./Card.style.css";
 
 // const mock = [
 //   {
@@ -40,30 +41,26 @@ export function Card({ title, entity }) {
     getData();
   }, [entity]);
 
-  if (loading)
-    return (
-      <div id="card" style={style.card}>
-        <p>loading {entity}</p>
-      </div>
-    );
+  if (loading) return <p className="text">loading {entity}</p>;
 
   return (
-    <ul id="document_list" style={style.document_list}>
-      <div id="card" style={style.card} onClick={() => setShow(!show)}>
-        <p>
-          {title} ({data?.length})
+    <>
+      <div id="card" className="card" onClick={() => setShow(!show)}>
+        <p className="text">
+          <strong>{title.toUpperCase()}</strong> ({data?.length})
         </p>
       </div>
-      {show &&
-        data.map((document) => (
-          <li id="document_item" style={style.document_item}>
-            <div id="card" style={style.card}>
-              <a style={style.document_link} href={`${document.link}`}>
+      {show && (
+        <ul id="document_list" className="document_list">
+          {data.map((document) => (
+            <li id="document_item" className="document_item">
+              <a className="link" href={`${document.link}`}>
                 {document.description}
               </a>
-            </div>
-          </li>
-        ))}
-    </ul>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
