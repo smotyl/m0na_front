@@ -11,6 +11,8 @@ export const card = {
 
 export const document_list = {
   listStyleType: "none",
+  maxWidth: "500px",
+  width: "100%",
 };
 
 export const document_item = {};
