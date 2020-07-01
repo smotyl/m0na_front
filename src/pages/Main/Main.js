@@ -10,8 +10,8 @@ export function Main() {
     <div style={style.main_content}>
       <img style={style.m0na_logo} src={logo} alt="m0na-bot logo" />
       <Card entity="alesp" title="São Paulo" />
-      {/* <Card entity="ales" title="Espírito Santo" />
-      <Card entity="alepr" title="Paraná" />
+      <Card entity="ales" title="Espírito Santo" />
+      {/* <Card entity="alepr" title="Paraná" />
       <Card entity="alba" title="Bahia" /> */}
     </div>
   );

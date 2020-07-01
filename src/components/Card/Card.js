@@ -43,7 +43,7 @@ export function Card({ title, entity }) {
   if (loading)
     return (
       <div id="card" style={style.card}>
-        <p>loading</p>
+        <p>loading {entity}</p>
       </div>
     );
 
