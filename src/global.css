@@ -8,3 +8,14 @@ body,
 body {
   background-color: #f3919e;
 }
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+}

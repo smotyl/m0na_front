@@ -12,3 +12,14 @@ export const m0na_logo = {
   height: "200px",
   width: "auto",
 };
+
+export const button = {
+  position: "absolute",
+  top: 10,
+  left: 10,
+
+  padding: "5px 10px",
+  color: "#fff",
+  fontWeight: "600",
+  backgroundColor: "rgba(98, 40, 150, 0.5)",
+};

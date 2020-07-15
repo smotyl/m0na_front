@@ -9,12 +9,16 @@ export function Card({ data }) {
     <>
       <div id="card" className="card" onClick={() => setShow(!show)}>
         <p className="text">
-          <strong>{data.grupo.toUpperCase()}</strong> ({data.list.length})
+          <strong>{data?.aka?.toUpperCase()}</strong> (
+          {`${data.items.length} de ${
+            data.total === "no_value" ? "_" : data.total
+          }`}
+          )
         </p>
       </div>
       {show && (
         <ul id="document_list" className="document_list">
-          {data.list.map((document) => (
+          {data.items.map((document) => (
             <li
               key={document.url + document.description}
               id="document_item"
