@@ -47,8 +47,16 @@ export function Main() {
     }
   }, []);
 
+  function handleClickRobots() {
+    getToday();
+    getYesterday();
+  }
+
   return (
     <div style={style.main_content}>
+      <button style={style.button} onClick={handleClickRobots}>
+        RUN B0TS
+      </button>
       <img style={style.m0na_logo} src={logo} alt="m0na-bot logo" />
 
       {loading ? <p>loading</p> : null}
