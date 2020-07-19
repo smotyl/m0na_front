@@ -1,20 +1,13 @@
-FROM node:12
-
-# Create app directory
+# Stage 1 - the build process
+FROM node:12 as build-deps
 WORKDIR /usr/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
-
-RUN npm install
-RUN npm update && npm install react-scripts@3.4.0 -g
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
+RUN yarn
 COPY . .
+RUN yarn build
 
+# Stage 2 - the production environment
+FROM nginx:1.12-alpine
+COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]
