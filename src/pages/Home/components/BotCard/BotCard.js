@@ -18,7 +18,7 @@ export default function BotCard({ currentData, previousData }) {
         : currentData?.total - previousData?.total;
 
     const data = {
-      title: currentData.aka.toUpperCase(),
+      title: currentData?.aka?.toUpperCase() || "_error",
       total: total,
       diff: diff,
 
@@ -26,7 +26,7 @@ export default function BotCard({ currentData, previousData }) {
     };
 
     setData(data);
-    setDisabled(!currentData.items.length);
+    setDisabled(!currentData.items?.length);
   }, [currentData, previousData]);
 
   return (
