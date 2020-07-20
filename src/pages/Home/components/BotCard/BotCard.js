@@ -10,7 +10,7 @@ export default function BotCard({ currentData, previousData }) {
   useEffect(() => {
     const total = currentData.total === "no_value" ? "N/A" : currentData.total;
     const diff =
-      currentData.total === "no_value" ||
+      (currentData && previousData && currentData.total === "no_value") ||
       currentData.total === "." ||
       previousData.total === "no_value" ||
       previousData.total === "."
