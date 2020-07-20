@@ -1,0 +1,10 @@
+.bot-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 5px 10px;
+}
+
+.bot-container-header > button {
+  margin-left: 10px;
+}

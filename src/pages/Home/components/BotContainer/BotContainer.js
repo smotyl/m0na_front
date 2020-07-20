@@ -4,6 +4,7 @@ import api from "../../../../services/api";
 
 import "./BotContainer.style.css";
 import { BotCard } from "../BotCard";
+import { Header } from "./components";
 import { BotContainer as BaseContainer } from "../../../../GlobalComponents";
 
 function BotContainer({ children, ...props }) {
@@ -47,10 +48,19 @@ function BotContainer({ children, ...props }) {
     }
   }, []);
 
+  function handleClickRefresh() {
+    getToday();
+    getYesterday();
+  }
+
   if (loading) return "loading";
 
   return (
     <BaseContainer>
+      <Header>
+        <p>{today[0]?.date}</p>
+        <button onClick={handleClickRefresh}>refresh</button>
+      </Header>
       <div className="container-content">
         {today.map((robot, i) => (
           <BotCard currentData={robot} previousData={yesterday[i]} />
