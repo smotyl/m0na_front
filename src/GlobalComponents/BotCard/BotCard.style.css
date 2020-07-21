@@ -27,7 +27,7 @@
   color: rgba(0, 0, 0, 0.1);
 }
 
-@media only screen and (max-width: 393px) {
+@media only screen and (max-width: 450px) {
   .bot-card {
     flex-direction: row;
     width: 100%;

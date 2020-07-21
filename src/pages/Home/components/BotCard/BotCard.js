@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { BotCard as BaseCard, Modal } from "../../../../GlobalComponents";
+import {
+  BotCard as BaseCard,
+  Modal,
+  Tooltip,
+} from "../../../../GlobalComponents";
 
 export default function BotCard({ currentData, previousData }) {
   const [totalData, setData] = useState({});
@@ -31,14 +35,19 @@ export default function BotCard({ currentData, previousData }) {
 
   return (
     <>
-      <BaseCard
+      <Tooltip
         disabled={disabled}
-        onClick={() => setModalVisible(!isModalVisible)}
+        text={`ver ${totalData?.items?.length} processos`}
       >
-        <h2 className="state-assembly">{totalData.title}</h2>
-        <h1 className="proccess-today">+{totalData.diff}</h1>
-        <span className="proccess-total">total: {totalData.total}</span>
-      </BaseCard>
+        <BaseCard
+          disabled={disabled}
+          onClick={() => setModalVisible(!isModalVisible)}
+        >
+          <h2 className="state-assembly">{totalData.title}</h2>
+          <h1 className="proccess-today">+{totalData.diff}</h1>
+          <span className="proccess-total">total: {totalData.total}</span>
+        </BaseCard>
+      </Tooltip>
 
       <Modal
         visible={isModalVisible}
