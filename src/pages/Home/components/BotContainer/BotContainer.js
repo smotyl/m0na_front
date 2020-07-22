@@ -16,11 +16,11 @@ function BotContainer({ children, ...props }) {
     const response = await api.get(`/updated-robots`);
     setLoading(false);
     setData(response.data);
-    localStorage.setItem("m0na_documents_today", JSON.stringify(response.data));
+    localStorage.setItem("m0na_files", JSON.stringify(response.data));
   }
 
   useEffect(() => {
-    const storageData = localStorage.getItem("m0na_file");
+    const storageData = localStorage.getItem("m0na_files");
 
     if (storageData) {
       setData(JSON.parse(data));
