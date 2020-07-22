@@ -23,7 +23,7 @@ function BotContainer({ children, ...props }) {
     const storageData = localStorage.getItem("m0na_files");
 
     if (storageData) {
-      setData(JSON.parse(data));
+      setData(JSON.parse(storageData));
     } else {
       getData();
     }
