@@ -6,46 +6,27 @@ import {
   Tooltip,
 } from "../../../../GlobalComponents";
 
-export default function BotCard({ currentData, previousData }) {
-  const [totalData, setData] = useState({});
+export default function BotCard({ robot }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    const total = currentData.total === "no_value" ? "N/A" : currentData.total;
-    const diff =
-      currentData?.total === "no_value" ||
-      currentData?.total === "." ||
-      previousData?.total === "no_value" ||
-      previousData?.total === "."
-        ? "N/A"
-        : currentData?.total - previousData?.total;
-
-    const data = {
-      title: currentData?.aka?.toUpperCase() || "_error",
-      total: total,
-      diff: diff,
-
-      items: currentData.items,
-    };
-
-    setData(data);
-    setDisabled(!currentData.items?.length);
-  }, [currentData, previousData]);
+    setDisabled(!robot.items?.length);
+  }, [robot]);
 
   return (
     <>
       <Tooltip
         disabled={disabled}
-        text={`ver ${totalData?.items?.length} processos`}
+        text={`ver ${robot?.items?.length} processos`}
       >
         <BaseCard
           disabled={disabled}
           onClick={() => setModalVisible(!isModalVisible)}
         >
-          <h2 className="state-assembly">{totalData.title}</h2>
-          <h1 className="proccess-today">+{totalData.diff}</h1>
-          <span className="proccess-total">total: {totalData.total}</span>
+          <h2 className="state-assembly">{robot.aka.toUpperCase()}</h2>
+          <h1 className="proccess-today">{robot.dif > 0 ? robot.dif : 0}</h1>
+          <span className="proccess-total">total: {robot.total}</span>
         </BaseCard>
       </Tooltip>
 
@@ -53,8 +34,14 @@ export default function BotCard({ currentData, previousData }) {
         visible={isModalVisible}
         changeVisible={() => setModalVisible(!isModalVisible)}
       >
-        <p>5 últimos resultados</p>
-        {totalData.items?.map((proccess) => (
+        <p>
+          Últimos resultados
+          <small>
+            {" "}
+            {robot.items?.length || 0} de {robot.total}
+          </small>
+        </p>
+        {robot.items?.map((proccess) => (
           <a className="link" href={`${proccess.url}`}>
             {proccess.description}
           </a>

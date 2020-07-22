@@ -8,49 +8,29 @@ import { Header } from "./components";
 import { BotContainer as BaseContainer } from "../../../../GlobalComponents";
 
 function BotContainer({ children, ...props }) {
-  const [today, setToday] = useState([]);
-  const [yesterday, setYesterday] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  async function getToday() {
+  async function getData() {
     setLoading(true);
-    const response = await api.get(`/today`);
+    const response = await api.get(`/updated-robots`);
     setLoading(false);
-    setToday(response.data);
+    setData(response.data);
     localStorage.setItem("m0na_documents_today", JSON.stringify(response.data));
   }
 
-  async function getYesterday() {
-    setLoading(true);
-    const response = await api.get(`/yesterday`);
-    setLoading(false);
-    setYesterday(response.data);
-    localStorage.setItem(
-      "m0na_documents_yesterday",
-      JSON.stringify(response.data)
-    );
-  }
-
   useEffect(() => {
-    const storageToday = localStorage.getItem("m0na_documents_today");
-    const storageYesterday = localStorage.getItem("m0na_documents_yesterday");
+    const storageData = localStorage.getItem("m0na_file");
 
-    if (storageToday) {
-      setToday(JSON.parse(storageToday));
+    if (storageData) {
+      setData(JSON.parse(data));
     } else {
-      getToday();
-    }
-
-    if (storageYesterday) {
-      setYesterday(JSON.parse(storageYesterday));
-    } else {
-      getYesterday();
+      getData();
     }
   }, []);
 
   function handleClickRefresh() {
-    getToday();
-    getYesterday();
+    getData();
   }
 
   if (loading) return "loading";
@@ -58,12 +38,12 @@ function BotContainer({ children, ...props }) {
   return (
     <BaseContainer>
       <Header>
-        <p>{today[0]?.date}</p>
+        <p>{data[0]?.date}</p>
         <button onClick={handleClickRefresh}>refresh</button>
       </Header>
       <div className="container-content">
-        {today.map((robot, i) => (
-          <BotCard currentData={robot} previousData={yesterday[i]} />
+        {data.map((robot, i) => (
+          <BotCard robot={robot} />
         ))}
       </div>
     </BaseContainer>
